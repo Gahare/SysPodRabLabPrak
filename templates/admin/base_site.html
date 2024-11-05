@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+<table class="app-auth module" style="width: 100%">
+                        <caption>
+                            Письма автоматических расссылок
+                        </caption>
+                        <tbody>
+                        <tr>
+                            <th><a href="/config/1">Письмо потдверждения записи</a></th>
+                        </tr>
+                        <tr>
+                            <th><a href="/config/2">Письмо успешной записи</a></th>
+                        </tr>
+                        <tr>
+                            <th><a href="/config/3">Письмо отмены записи</a></th>
+                        </tr>
+                        <tr>
+                            <th><a href="/config/4">Письмо верификации регистрации</a></th>
+                        </tr>
+                        </tbody>
+                    </table>

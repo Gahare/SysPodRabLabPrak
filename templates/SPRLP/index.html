@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Index</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools"><a href="login">Личный кабинет</a></div>
+</div>
+<div class="schedule-week">
+    <div class="subheader">Открытые дни для записи</div>
+    <table>
+        {% for date in dates %}
+            <tr class="schedule-day">
+                <th><a href="{{ date.date_url }}">{{ date.date }}</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <title>Assigment</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools"><a href="/login">Личный кабинет</a></div>
+</div>
+
+{% if form != "" %}
+    <div class="schedule-week">
+        <div class="subheader">Введите новый шаблон писем рассылки</div>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.auto_id }}">{{ field.label }}:</label>
+                <div class="form-row">{{ field }}</div>
+            {% endfor %}
+            <input type="submit" value="Записаться" style="margin: 5px 5px 5px">
+        </form>
+    </div>
+{% endif %}
+</body>
+</html>

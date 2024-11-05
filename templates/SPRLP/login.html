@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Login</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+</div>
+<div class="schedule-week">
+    <div class="subheader">Введите данные для входа</div>
+    {% if response == "Неверные данные" %}
+        <p class="errornote">{{ response }}</p>
+    {% elif response == "Пользователь не проверен" %}
+        <p class="errornote">{{ response }}</p>
+    {% endif %}
+    <div style="width: fit-content">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.auto_id }}">{{ field.label }}:</label>
+                <div class="form-row">{{ field }}</div>
+            {% endfor %}
+            <input type="submit" value="Войти" style="margin-top: 5px">
+        </form>
+    </div>
+    <div class="subheader" style="margin-top: 40px">Зарегистрируйтесь при работе с системой впервые</div>
+    <form action="/register">
+        <input type="submit" value="Зарегистрироваться" />
+    </form>
+</div>
+</body>
+</html>

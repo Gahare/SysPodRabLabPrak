@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Profile</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools">
+        <form action="" method="post">{% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+</div>
+<div class="schedule-week">
+    <div class="subheader">Добро пожаловать, {{ user.first_name }}</div>
+    <div><h4>Вы записаны на практики:</h4></div>
+    {% if not future %}
+        <div>Вы не записаны на практики</div>
+    {% endif %}
+    <table>
+        {% for task in future %}
+            <tr>
+                <th>{{ task.task.name }} - {{ task.date }} - <a href="cancel/{{ task.id }}">Отменить запись</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+    <div><h4>Ваши прошлые практики:</h4></div>
+    {% if not previous %}
+        <div>Вы не были записаны на практики</div>
+    {% endif %}
+    <table>
+        {% for task in previous %}
+            <tr>
+                <th>{{ task.task.name }}</th><th>{{ task.date }}</th><th>{{ task.reviewer.first_name }} {{ task.reviewer.surname }} {{ task.reviewer.last_name }}</th><th>Оценка:
+                {% if task.mark == Null %}
+                    Не оценено
+                {% else %}
+                {{ task.mark }}</th>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

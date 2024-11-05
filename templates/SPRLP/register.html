@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Register</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+</div>
+<div class="schedule-week">
+    <div class="subheader">Введите данные для регистрации</div>
+    {% if response == "Произошла ошибка" %}
+        <p class="errornote">{{ response }}</p>
+    {% elif response == "Логин должен быть уникальным" %}
+        <p class="errornote">{{ response }}</p>
+    {% elif response == "Студент с такими данными уже существует" %}
+        <p class="errornote">{{ response }}</p>
+    {% elif response == "Регистрация отправлена на рассмотрение" %}
+        <p class="approvenote">{{ response }}</p>
+    {% endif %}
+    <div style="width: fit-content">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.auto_id }}">{{ field.label }}:</label>
+                <div class="form-row">{{ field }}</div>
+            {% endfor %}
+            <input type="submit" value="Зарегистрироваться" style="margin-top: 5px">
+        </form>
+    </div>
+</div>
+</body>
+</html>

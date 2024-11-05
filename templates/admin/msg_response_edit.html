@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+    <h1>Изменение письма рассылки</h1>
+<div class="colM">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <label for="{{ field.auto_id }}">{{ field.label }}:</label>
+            <div class="form-row">{{ field }}</div>
+            <div>{{ field.help_text }}</div>
+        {% endfor %}
+        <input type="submit" value="Изменить" style="margin: 5px 5px 5px">
+    </form>
+<div style="margin-top: 10px; margin-bottom: 10px">При работе с шаблоном используются переменные:</div>
+    <table>
+        <tr>
+            <th>$first_name</th>
+            <th>Имя студента</th>
+        </tr>
+        <tr>
+            <th>$last_name</th>
+            <th>Фамилия студента</th>
+        </tr>
+        <tr>
+            <th>$surname</th>
+            <th>Отчество студента</th>
+        </tr>
+        <tr>
+            <th>$group</th>
+            <th>Группа студента</th>
+        </tr>
+        <tr>
+            <th>$code</th>
+            <th>Код подтверждения записи</th>
+        </tr>
+        <tr>
+            <th>$task_name</th>
+            <th>Название задания</th>
+        </tr>
+        <tr>
+            <th>$task_date</th>
+            <th>Дата задания</th>
+        </tr>
+    </table>
+    <div style="margin-top: 10px">Используйте переменные в соответсвующих письмах!</div>
+</div>
+{% endblock %}

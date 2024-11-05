@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Profile</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools">
+        <form action="" method="post">{% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+</div>
+<div class="schedule-week">
+    <div class="subheader">Добро пожаловать, {{ user.first_name }}</div>
+    {% if current %}
+        <div><h4>У вас есть задачи, ожидающие оценки</h4></div>
+        <div><a href="evaluate">Перейти к оценке</a></div>
+    {% else %}
+        <div><h4>У вас нет задач, ожидающих оценки</h4></div>
+    {% endif %}
+    {% if approve %}
+        <div><h4>Есть пользователи, требующие верификации</h4></div>
+        <div><a href="approve">Перейти к верификации</a></div>
+    {% endif %}
+</div>
+</body>
+</html>

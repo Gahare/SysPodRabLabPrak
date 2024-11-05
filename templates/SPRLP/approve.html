@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Approve</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools"><a href="/login">Личный кабинет</a></div>
+</div>
+<div class="schedule-week">
+    <form method="post">
+        {% csrf_token %}
+        <table>
+        <tr>
+            <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Отчество</th>
+                    <th>Группа</th>
+                    <th>Почта</th>
+                    <th>Подтвердить</th>
+
+        </tr>
+            {% for user in approve %}
+                <tr>
+                    <th>{{ user.first_name }}</th>
+                    <th>{{ user.last_name }}</th>
+                    <th>{{ user.surname }}</th>
+                    {% for group in user.groups.all %}
+                    {% if group.name != "Студент" %}<th>{{ group }}</th>{% endif %}
+                    {% endfor %}
+                    <th>{{ user.email }}</th>
+                    <th>Подтвердить:</th>
+                    <th><select name="{{ user.id }}">
+                        <option value="none">-</option>
+                        <option value="Yes">Да</option>
+                        <option value="No">Нет</option>
+                    </select></th>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" style="margin: 10px 0 0" value="Верифицировать">
+    </form>
+</div>
+</body>
+</html>

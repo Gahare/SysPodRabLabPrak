@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Schedule</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools"><a href="login">Личный кабинет</a></div>
+</div>
+{% if response %}
+    <div class="schedule-week">
+        {% if ustanovkas %}
+            <div class="subheader">Задачи на {{ dateResponse }}</div>
+            <table>
+                {% for ustn in ustanovkas %}
+                    <tr>
+                        <th class="ustnheader">{{ ustn.name }}</th>
+                    </tr>
+                    {% for task in ustn.tasks %}
+                        <tr>
+                            {% if task.isTaken %}
+                                <th class="unavailable">{{ task.task.name }}</th>
+                            {% else %}
+                                <th class="available"><a href="task/{{ task.id }}">{{ task.task.name }}</a></th>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="subheader">Задач на {{ dateResponse }} нет</div>
+        {% endif %}
+    </div>
+{% else %}
+    <div class="subheader">Запись на этот день закрыта</div>
+{% endif %}
+</body>
+</html>

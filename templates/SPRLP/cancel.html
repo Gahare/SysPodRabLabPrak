@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "SPRLP/style.css" %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Cancel</title>
+</head>
+<body>
+<div class="header">
+    <div class="branding" onclick="window.location.href = '/'"><h3>Запись на практикум</h3></div>
+    <div class="user-tools"><a href="/login">Личный кабинет</a></div>
+</div>
+<div class="schedule-week">
+    <p class="errornote" style="border: 0">Вы действительно хотите отменить свою запись?</p>
+    <div>
+        <form method="post" style="display: inline">
+            {% csrf_token %}
+            <input type="hidden" id="postConf" name="postConf" value="1">
+            <input type="submit" value="Да">
+        </form>
+        <form style="display: inline" action="/">
+            <input type="submit" value="Нет">
+        </form>
+    </div>
+</div>
+</body>
+</html>
